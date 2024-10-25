@@ -1,7 +1,10 @@
 <?php
 declare(strict_types=1);
 
+use App\Controllers\CategoriesAPIController;
 use App\Controllers\CoursesAPIController;
+use App\Controllers\AllBooksAPIController;
+use App\Controllers\HighestRatedBooksAPIController;
 use Slim\App;
 use Slim\Views\PhpRenderer;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
@@ -18,6 +21,10 @@ return function (App $app) {
 
     $app->get('/courses', CoursesAPIController::class);
 
-   $app->get('/books', \App\Controllers\AllBooksAPIController::class);
+    $app->get('/books', AllBooksAPIController::class);
+
+    $app->get('/fives', HighestRatedBooksAPIController::class);
+
+    $app->get('/categories', CategoriesAPIController::class);
 
 };

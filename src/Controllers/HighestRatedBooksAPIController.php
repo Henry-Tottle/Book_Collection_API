@@ -5,28 +5,23 @@ namespace App\Controllers;
 use App\Models\BooksModel;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Slim\Http\Response;
 
-class AllBooksAPIController
+class HighestRatedBooksAPIController
 {
-
     private BooksModel $model;
-
     public function __construct(BooksModel $model)
     {
         $this->model = $model;
     }
 
-    public function __invoke(RequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    public function __invoke(RequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        $books = $this->model->getBooks();
+        $highestRatedBooks = $this->model->getHighestRatedBooks();
         $responseBody = [
-            'message' => 'Books successfully retrieved from database.',
+            'message' => 'Successfully retrieved highest rated books.',
             'status' => 200,
-            'data' => $books
+            'data' => $highestRatedBooks
         ];
         return $response->withHeader('Access-Control-Allow-Origin', '*')->withJson($responseBody);
-
     }
-
 }
