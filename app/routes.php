@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Controllers\BooksByCategoryAPIController;
 use App\Controllers\CategoriesAPIController;
 use App\Controllers\CoursesAPIController;
 use App\Controllers\AllBooksAPIController;
@@ -26,5 +27,7 @@ return function (App $app) {
     $app->get('/fives', HighestRatedBooksAPIController::class);
 
     $app->get('/categories', CategoriesAPIController::class);
+
+    $app->get('/{category}', BooksByCategoryAPIController::class);
 
 };

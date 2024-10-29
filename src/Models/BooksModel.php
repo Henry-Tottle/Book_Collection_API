@@ -32,6 +32,14 @@ class BooksModel
         return $highestRatedBooks;
     }
 
+    public function getBooksByCategory(string $category): array
+    {
+        $query = $this->db->prepare("SELECT * FROM `books` INNER JOIN `authors` ON `books`.`author_id` = `authors`.`id` WHERE `genre_1` = :category");
+        $query->execute(['category' => $category]);
+        $booksByCategory = $query->fetchAll();
+        return $booksByCategory;
+    }
+
     public function getCategories(): array
     {
         $query = $this->db->prepare('SELECT DISTINCT `genre_1` FROM `books`');
